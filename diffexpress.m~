@@ -1,0 +1,5 @@
+%% Start of the mathworks workflow
+load melRNAseq.mat;
+melData(1:10,:)
+
+%
