@@ -12,5 +12,17 @@ unablated=melFPKM(7:12,:);
 % Chromosome mapping portion is dependent on having chromosome position
 % information in the starting data set... Shoot.
 
-% Also, need read count data to normalize and everything that follows from
-% that.
+% Normalization
+% estimate pseudo-reference with geometric mean row by row
+melFPKMalt=melFPKM';
+pseudoRefSample = geomean(melFPKMalt,2);
+nz = pseudoRefSample > 0;
+ratios = bsxfun(@rdivide,melFPKMalt(nz,:),pseudoRefSample(nz));
+sizeFactors = median(ratios,1);
+
+%figure;
+
+%subplot(2,1,1)
+%maboxplot(log2(melFPKMalt),'title','Raw Read Count','orientation','horizontal')
+%ylabel('sample')
+%xlabel('log2(FPKM)')
