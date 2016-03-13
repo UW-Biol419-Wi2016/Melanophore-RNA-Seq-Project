@@ -12,6 +12,21 @@ unablated=melFPKM(7:12,:);
 % Chromosome mapping portion is dependent on having chromosome position
 % information in the starting data set... Shoot.
 
+% Normalization
+% estimate pseudo-reference with geometric mean row by row
+melFPKMalt1=melFPKM';
+pseudoRefSample = geomean(melFPKMalt1,2);
+nz = pseudoRefSample > 0;
+ratios = bsxfun(@rdivide,melFPKMalt1(nz,:),pseudoRefSample(nz));
+sizeFactors = median(ratios,1);
+
+%figure;
+
+%subplot(2,1,1)
+%maboxplot(log2(melFPKMalt),'title','Raw Read Count','orientation','horizontal')
+%ylabel('sample')
+%xlabel('log2(FPKM)')
+
 % Also, need read count data to normalize and everything that follows from
 % that.
 %% Removing FPKM values below 1
@@ -25,47 +40,56 @@ for i=1:38125;
     end;
 end;
 %% To plot the mean FPKM values between the two groups
-
+mF4=melFPKM';
 mF2 = melFPKMalt'; % it didn't work with the non-transposed version
 
 % find mean (with transpose)
-meanUA = mean(mF2(:, 7:12),2);
-meanA = mean(mF2(:, 1:6),2);
+meanUAnew = mean(mF2(:, 7:12),2);
+meanAnew = mean(mF2(:, 1:6),2);
+
+meanUA = mean(mF4(:, 7:12),2);
+meanA = mean(mF4(:, 1:6),2);
+
+
+% convert zeros to NaN
+% meanAnew(meanA ==0) = NaN;
+% meanUAnew(meanUA ==0) = NaN;
 
 % find dispersion (with transpose)
-dispUA = std(mF2(:,7:12),0,2) ./ meanUA;
-dispA = std(mF2(:,1:6),0,2) ./ meanA;
+dispUA = std(mF2(:,7:12),0,2) ./ meanUAnew;
+dispA = std(mF2(:,1:6),0,2) ./ meanAnew;
 
 % plot on a log-log scale (with transpose)
 figure;
-loglog(meanUA, dispUA, 'or');
+loglog(meanUAnew, dispUA, 'or');
 hold on;
-loglog(meanA, dispA, 'ob');
+loglog(meanAnew, dispA, 'ob');
 xlabel('log2(mean)');
 ylabel('log2(Dispersion)');
 legend('UnAblated', 'Ablated', 'Location', 'southwest');
 
 
-% convert zeros to NaN
-meanA(meanA ==0) = NaN;
-meanUA(meanUA ==0) = NaN;
-
-mdl=fitlm(meanUA,meanA);
-
+%p=polyfit(log2(meanUA),log2(meanA),1);
+%y=polyval(p,log2(meanA));
+x=(1:20);
+y=x-1;
 % scatter plot of means
 figure;
-plot(log2(meanUA),log2(meanA), 'o');
+hold on;
+plot(x,y, 'r-');
+plot(log2(meanUAnew),log2(meanAnew), 'o');
 xlabel('UnAblated Ctrl');
 ylabel('Ablated');
 
 %% Fold Change
 
 % compute the mean and the log2FoldChange
-meanBase = (meanUA + meanA) / 2;
-foldChange = meanA ./ meanUA;
+meanBase = (meanUAnew + meanAnew) / 2;
+foldChange = meanAnew ./ meanUAnew;
 log2FC = log2(foldChange);
 
 % plot mean vs. fold change (MA plot)
-mairplot(meanA, meanUA,'Type','MA','Plotonly',true);
+mairplot(meanAnew, meanUAnew,'Type','MA','Plotonly',true);
 set(get(gca,'Xlabel'),'String','mean of normalized counts')
 set(get(gca,'Ylabel'),'String','log2(fold change)')
+
