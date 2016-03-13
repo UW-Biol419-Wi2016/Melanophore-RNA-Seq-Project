@@ -2,7 +2,7 @@
 load melRNAseq.mat;
 melData(1:10,:)
 
-% Took a peek at the data, want to assign groups for ablated and unablated
+% assign groups for ablated and unablated (our 2 conditions)
 ablated=melFPKM(1:6,:);
 unablated=melFPKM(7:12,:);
 
@@ -49,7 +49,6 @@ meanAnew = mean(mF2(:, 1:6),2);
 
 meanUA = mean(mF4(:, 7:12),2);
 meanA = mean(mF4(:, 1:6),2);
-
 
 % convert zeros to NaN
 % meanAnew(meanA ==0) = NaN;
