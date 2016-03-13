@@ -1,0 +1,7 @@
+%% Assessing within group correlation
+[coeff, score, latent] = pca(melFPKM);
+
+figure;
+stairs(cumsum(latent)/sum(latent));
+
+% 95% of data is explained by 2 PCAs
