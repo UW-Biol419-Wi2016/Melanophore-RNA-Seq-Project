@@ -50,10 +50,6 @@ meanAnew = mean(mF2(:, 1:6),2);
 meanUA = mean(mF4(:, 7:12),2);
 meanA = mean(mF4(:, 1:6),2);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 % convert zeros to NaN
 % meanAnew(meanA ==0) = NaN;
 % meanUAnew(meanUA ==0) = NaN;
@@ -71,7 +67,6 @@ xlabel('log2(mean)');
 ylabel('log2(Dispersion)');
 legend('UnAblated', 'Ablated', 'Location', 'southwest');
 
-<<<<<<< HEAD
 % convert zeros to NaN
 meanA(meanA ==0) = NaN;
 meanUA(meanUA ==0) = NaN;
@@ -95,8 +90,6 @@ ylabel('Ablated');
 x=(1:20);
 y=x-0.5;
 
-=======
-
 %p=polyfit(log2(meanUA),log2(meanA),1);
 %y=polyval(p,log2(meanA));
 x=(1:20);
@@ -106,7 +99,6 @@ y=x-1;
 figure;
 hold on;
 plot(x,y, 'r-');
-<<<<<<< HEAD
 plot(log2(meanUA),log2(meanA), 'o');
 
 %p=polyfit(log2(meanUA),log2(meanA),1);
@@ -118,10 +110,7 @@ figure;
 hold on;
 plot(x,y, 'r-');
 plot(log2(meanUAnew),log2(meanAnew), 'o');
->>>>>>> master
-=======
 plot(log2(meanUAnew),log2(meanAnew), 'o');
->>>>>>> master
 xlabel('UnAblated Ctrl');
 ylabel('Ablated');
 
@@ -144,7 +133,3 @@ set(get(gca,'Ylabel'),'String','log2(fold change)')
 
 % geneTable = table(meanBase, meanA, meanUA, foldChange, log2FC);
 % geneTable.properties.RowNames = zgenes.tracking_id
-
-%% 
-=======
->>>>>>> master
