@@ -127,9 +127,3 @@ log2FC = log2(foldChange);
 mairplot(meanAnew, meanUAnew,'Type','MA','Plotonly',true);
 set(get(gca,'Xlabel'),'String','mean of normalized counts')
 set(get(gca,'Ylabel'),'String','log2(fold change)')
-
-<<<<<<< HEAD
-%% create table with gene statistics 
-
-% geneTable = table(meanBase, meanA, meanUA, foldChange, log2FC);
-% geneTable.properties.RowNames = zgenes.tracking_id
