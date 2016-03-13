@@ -114,8 +114,6 @@ plot(log2(meanUAnew),log2(meanAnew), 'o');
 xlabel('UnAblated Ctrl');
 ylabel('Ablated');
 
-% 
-
 %% Fold Change
 
 % compute the mean and the log2FoldChange
@@ -127,3 +125,4 @@ log2FC = log2(foldChange);
 mairplot(meanAnew, meanUAnew,'Type','MA','Plotonly',true);
 set(get(gca,'Xlabel'),'String','mean of normalized counts')
 set(get(gca,'Ylabel'),'String','log2(fold change)')
+
