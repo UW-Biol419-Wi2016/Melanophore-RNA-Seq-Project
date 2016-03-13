@@ -52,11 +52,32 @@ meanUA(meanUA ==0) = NaN;
 
 mdl=fitlm(meanUA,meanA);
 
+% linear regression
+[p,ErrorEst] = polyfit(log2(meanUA),log2(meanA),1);
+pop_fit = polyval(p, log2(meanUA), ErrorEst);
+
+
 % scatter plot of means
 figure;
+plot(log2(meanUA), pop_fit, '-');
+hold on;
+plot(log2(meanUA), log2(meanA),'o');
+% plot(log2(meanUA),log2(meanA), 'o');
+xlabel('UnAblated Ctrl');
+ylabel('Ablated');
+
+x=(1:20);
+y=x-0.5;
+
+% scatter plot of means
+figure;
+hold on;
+plot(x,y, 'r-');
 plot(log2(meanUA),log2(meanA), 'o');
 xlabel('UnAblated Ctrl');
 ylabel('Ablated');
+
+% 
 
 %% Fold Change
 
@@ -69,3 +90,8 @@ log2FC = log2(foldChange);
 mairplot(meanA, meanUA,'Type','MA','Plotonly',true);
 set(get(gca,'Xlabel'),'String','mean of normalized counts')
 set(get(gca,'Ylabel'),'String','log2(fold change)')
+
+%% create table with gene statistics 
+
+geneTable = table(meanBase, meanA, meanUA, foldChange, log2FC);
+geneTable.properties.RowNames = zgenes.tracking_id
