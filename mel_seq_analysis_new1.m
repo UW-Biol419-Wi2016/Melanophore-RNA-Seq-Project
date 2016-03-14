@@ -4,9 +4,8 @@
 
 %% load the dataset
 load melRNAseq.mat;
-melData(1:10,:);
 
-%% assign groups for ablated and unablated (our 2 conditions)
+%% assign groups for ablated (-TH) and unablated (+TH) (our 2 conditions)
 ablated=melFPKM(1:6,:);
 unablated=melFPKM(7:12,:);
 
@@ -20,26 +19,13 @@ zerMeanUA = mUA;
 plusMeanA = zerMeanA + 1;
 plusMeanUA = zerMeanUA + 1;
 
-% Workflow suggests that we can make a summary table of reads that were
-% assigned vs unassigned if our files came with that information.
-
-% Normalization
 % estimate pseudo-reference with geometric mean row by row
-melFPKMalt1=melFPKM';
-pseudoRefSample = geomean(melFPKMalt1,2);
-nz = pseudoRefSample > 0;
-ratios = bsxfun(@rdivide,melFPKMalt1(nz,:),pseudoRefSample(nz));
-sizeFactors = median(ratios,1);
+% melFPKMalt1=melFPKM';
+% pseudoRefSample = geomean(melFPKMalt1,2);
+% nz = pseudoRefSample > 0;
+% ratios = bsxfun(@rdivide,melFPKMalt1(nz,:),pseudoRefSample(nz));
+% sizeFactors = median(ratios,1);
 
-%figure;
-
-%subplot(2,1,1)
-%maboxplot(log2(melFPKMalt),'title','Raw Read Count','orientation','horizontal')
-%ylabel('sample')
-%xlabel('log2(FPKM)')
-
-% Also, need read count data to normalize and everything that follows from
-% that.
 %% Removing FPKM values below 1
 
 melFPKMalt=melFPKM;

@@ -1,0 +1,71 @@
+A1 Reads:
+          Input     :   9404766
+           Mapped   :   7339611 (78.0% of input)
+            of these:     46751 ( 0.6%) have multiple alignments (91 have >20)
+78.0% overall read mapping rate.
+
+A2 Reads:
+          Input     :  18739616
+           Mapped   :  15592662 (83.2% of input)
+            of these:     99802 ( 0.6%) have multiple alignments (327 have >20)
+83.2% overall read mapping rate.
+
+A3 Reads:
+          Input     :  18143386
+           Mapped   :  15318835 (84.4% of input)
+            of these:    294850 ( 1.9%) have multiple alignments (623 have >20)
+84.4% overall read mapping rate.
+
+A5 Reads:
+          Input     :   8651816
+           Mapped   :   5493589 (63.5% of input)
+            of these:    127911 ( 2.3%) have multiple alignments (359 have >20)
+63.5% overall read mapping rate.
+
+A7 Reads:
+          Input     :  11482919
+           Mapped   :   7550500 (65.8% of input)
+            of these:    364739 ( 4.8%) have multiple alignments (1096 have >20)
+65.8% overall read mapping rate.
+
+A8 Reads:
+          Input     :   7307369
+           Mapped   :   5544846 (75.9% of input)
+            of these:    195341 ( 3.5%) have multiple alignments (535 have >20)
+75.9% overall read mapping rate.
+
+UA1 Reads:
+          Input     :  15384559
+           Mapped   :  11562326 (75.2% of input)
+            of these:    157986 ( 1.4%) have multiple alignments (282 have >20)
+75.2% overall read mapping rate.
+
+UA2 Reads:
+          Input     :  14314495
+           Mapped   :  10762791 (75.2% of input)
+            of these:    414436 ( 3.9%) have multiple alignments (1056 have >20)
+75.2% overall read mapping rate.
+
+UA3 Reads:
+          Input     :  15172035
+           Mapped   :  11020468 (72.6% of input)
+            of these:    525266 ( 4.8%) have multiple alignments (731 have >20)
+72.6% overall read mapping rate.
+
+UA5 Reads:
+          Input     :  14413127
+           Mapped   :  11603172 (80.5% of input)
+            of these:    102643 ( 0.9%) have multiple alignments (93 have >20)
+80.5% overall read mapping rate.
+
+UA7 Reads:
+          Input     :  14043400
+           Mapped   :  10868423 (77.4% of input)
+            of these:    104705 ( 1.0%) have multiple alignments (102 have >20)
+77.4% overall read mapping rate.
+
+UA8 Reads:
+          Input     :  17061177
+           Mapped   :  13665392 (80.1% of input)
+            of these:    273420 ( 2.0%) have multiple alignments (1318 have >20)
+80.1% overall read mapping rate.
