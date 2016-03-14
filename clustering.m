@@ -66,9 +66,6 @@ title('Melanophore Data with 3 PCs');
 legend('Ablated','Unablated')
 axis equal;
 
-
-
-
 %%  QDA 
 
 N=100;
