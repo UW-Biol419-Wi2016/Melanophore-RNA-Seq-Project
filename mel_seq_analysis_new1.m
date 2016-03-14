@@ -9,9 +9,6 @@ unablated=melFPKM(7:12,:);
 % Workflow suggests that we can make a summary table of reads that were
 % assigned vs unassigned if our files came with that information.
 
-% Chromosome mapping portion is dependent on having chromosome position
-% information in the starting data set... Shoot.
-
 % Normalization
 % estimate pseudo-reference with geometric mean row by row
 melFPKMalt1=melFPKM';
