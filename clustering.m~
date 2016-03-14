@@ -32,21 +32,19 @@ lCVA = sum(groundtruth'-pX' ==0)/length(groundtruth);
 LDA.ClassNames([1;2])
 K=LDA.ClassNames(1,2).Const;
 L=LDA.ClassNames(1,2).Linear;
-y=@(x1,x2)K+L(1)*x1+L(2)*x2
-x1=(.9:7.1);
-x2=(0:2.5);
 
 figure;
 plot(score(group1, 1), score(group1, 2), 'ro');
 hold on
 plot(score(group2, 1), score(group2, 2), 'bo');
-plot(x1,x2,y, 'r-');
 xlabel('pc1');
 ylabel('pc2');
 title('Melanophore Data PCA With 2 Groups');
 axis equal;
 
-
+y=@(x1,x2)K+L(1)*x1+L(2)*x2
+x1=(.9:7.1);
+x2=(0:2.5);
 
 
 %%  QDA 
