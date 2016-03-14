@@ -19,51 +19,84 @@ hold on
 plot(score(group2, 1), score(group2, 2), 'bo');
 xlabel('pc1');
 ylabel('pc2');
-title('Melanophore Data PCA With 2 Groups');
+title('Melanophore Data PCA With 2 PCs');
+legend('Ablated','Unablated')
 axis equal;
 
 %% LDA
+G=groundtruth';
+myPCs = score(:,1:11);
+N=100;
 
-LDA = fitcdiscr(score(:,1:10), groundtruth');
-pX = predict(LDA, score(:,1:10));
+test_frac = 0.2;
+
+for i=1:N;
+
+ permuted = randperm(numel(myPCs(:,1)));
+
+ test_set = permuted(1:floor(numel(myPCs(:,1))*test_frac));
+
+ train_set = permuted(ceil((numel(myPCs(:,1))*test_frac)):end);
+
+ LDA = fitcdiscr(myPCs(train_set,:), G(:,train_set));
+
+ pX = predict(LDA, myPCs(test_set,:));
+
+ lCVA = sum(G(:,test_set)-pX' ==0)/length(G(:,test_set));
+
+ cvas(i)=lCVA;
+
+end;
+
+LDA = fitcdiscr(score(:,1:3), groundtruth');
+pX = predict(LDA, score(:,1:3));
 
 lCVA = sum(groundtruth'-pX' ==0)/length(groundtruth);
 
-LDA.ClassNames([1;2])
-K=LDA.ClassNames(1,2).Const;
-L=LDA.ClassNames(1,2).Linear;
-y=@(x1,x2)K+L(1)*x1+L(2)*x2
-x1=(.9:7.1);
-x2=(0:2.5);
 
 figure;
-plot(score(group1, 1), score(group1, 2), 'ro');
+scatter3(score(group1, 1), score(group1, 2), score(group1, 3), 'ro');
 hold on
-plot(score(group2, 1), score(group2, 2), 'bo');
-plot(x1,x2,y, 'r-');
+scatter3(score(group2, 1), score(group2, 2), score(group2, 3), 'bo');
+
 xlabel('pc1');
 ylabel('pc2');
-title('Melanophore Data PCA With 2 Groups');
+zlabel('pc3');
+title('Melanophore Data with 3 PCs');
+legend('Ablated','Unablated')
 axis equal;
 
 
 
 
 %%  QDA 
-% broken
 
-QDA = fitcdiscr(score(:,1:10), groundtruth','DiscrimType', 'quadratic');
-pXq = predict(QDA, score(:,1:10));
+N=100;
+cvas2=zeros(100);
+test_frac = 0.2;
 
-qCVA = sum(groundtruth'-pXq' ==0)/length(groundtruth);
 
-%% Train a decision tree
-% also sooo broken
-tree = fitctree(score(:,1:10), groundtruth', 'CrossVal', 'on');
-pTree = predict(tree, score(:,1:10));
-tCVA = sum(groundtruth'-pXq' ==0)/length(groundtruth);
+for i=1:N;
 
-view(tree.Trained{1}, 'Mode', 'graph');
+ permuted = randperm(numel(myPCs(:,1)));
+
+ test_set = permuted(1:floor(numel(myPCs(:,1))*test_frac));
+
+ train_set = permuted(ceil((numel(myPCs(:,1))*test_frac)):end);
+
+ QDA = fitcdiscr(myPCs(train_set,:), G(:,train_set),...
+     'DiscrimType', 'quadratic', 'Gamma', 1);
+
+ pX2 = predict(QDA, myPCs(test_set,:));
+
+ qCVA = sum(G(:,test_set)-pX2' ==0)/length(G(:,test_set));
+
+ cvas2(i)=qCVA;
+
+end;
+
+myCVA = mean(cvas2);
+
 
 %% kmeans
 melkmeans=kmeans(melFPKM, 2);
