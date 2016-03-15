@@ -119,16 +119,23 @@ b1 = log2(plusMeanUA)/log2(plusMeanA);
 yCalc1 = b1 * log2(plusMeanUA);
 
 x = log2(plusMeanUA);
+y2 = log2(plusMeanA);
+
+mdl = fitlm(x, y2, 'Linear');
+lmCI = coefCI(mdl);
+
+figure;
+plot(mdl);
 
 % scatter plot of means
 figure;
-plot(x, log2(plusMeanA), '.');
+plot(x, y2, '.');
 hold on;
 plot(x,yCalc1, 'k-');
 hold on;
 plot(x, y, 'm-');
-hold on;
-plot(x, y-delta, 'g', x, y+delta, 'c');
+%hold on;
+%plot(x, y-delta, 'g', x, y+delta, 'c');
 xlabel('UnAblated Ctrl');
 ylabel('Ablated');
 
