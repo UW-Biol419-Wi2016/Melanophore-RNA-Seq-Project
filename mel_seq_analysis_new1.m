@@ -68,55 +68,17 @@ legend('UnAblated', 'Ablated', 'Location', 'southwest');
 meanA(meanA ==0) = NaN;
 meanUA(meanUA ==0) = NaN;
 
+% linear regression model 
 mdl=fitlm(meanUA,meanA);
 
-% linear regression
-R = polyfit(log2(plusMeanA), log2(plusMeanUA), 2);
-
-% scatter plot of means
-figure;
-% plot(log2(meanUA), pop_fit, '-');
-hold on;
-plot(log2(meanUA), log2(meanA),'o');
-% plot(log2(meanUA),log2(meanA), 'o');
-xlabel('UnAblated Ctrl');
-ylabel('Ablated');
-
-x=(1:20);
-y=x-0.5;
-
-% scatter plot of means
-figure;
-hold on;
-plot(x,y, 'r-');
-plot(log2(meanUA),log2(meanA), 'o');
-
-%p=polyfit(log2(meanUA),log2(meanA),1);
-%y=polyval(p,log2(meanA));
-x=(1:20);
-y=x-1;
-
-%% use this one
-
-R1 = polyfit(log2(meanUAnew), log2(meanAnew), 1);
-
-% scatter plot of means
-figure;
-hold on;
-% plot(x,y, 'r-');
-plot(log2(meanUAnew),log2(meanAnew), 'o');
-hold on;
-plot(R, 'b-');
-xlabel('UnAblated Ctrl');
-ylabel('Ablated');
 
 %% try this plot (FPKM with pseudocount)
 
 [p,S] = polyfit(log2(plusMeanUA), log2(plusMeanA), 1);
 [y, delta] = polyval(p,log2(plusMeanUA),S);
 
-b1 = log2(plusMeanUA)/log2(plusMeanA);
-yCalc1 = b1 * log2(plusMeanUA);
+% b1 = log2(plusMeanUA)/log2(plusMeanA);
+% yCalc1 = b1 * log2(plusMeanUA);
 
 x = log2(plusMeanUA);
 y2 = log2(plusMeanA);
@@ -127,10 +89,9 @@ lmCI = coefCI(mdl);
 figure;
 plot(mdl);
 hold on;
-plot(x,yCalc1, 'g-');
-xlabel('UnAblated Ctrl');
-ylabel('Ablated');
-legend('FPKM data', 'fit', 'Confidence Bounds', '', 'manual l-fit');
+% plot(x,yCalc1, 'g-');
+xlabel('log2(UnAblated Ctrl FPKM)');
+ylabel('log2(Ablated FPKM)');
 title('Log Transformed FPKM Mean Data');
 
 % scatter plot of means
