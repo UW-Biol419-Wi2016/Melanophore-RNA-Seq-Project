@@ -4,6 +4,9 @@
 
 figure;
 stairs(cumsum(latent)/sum(latent));
+ylabel('% Variance Described');
+xlabel('PC');
+title('Variance Described By Principal Components');
 
 % 2 PCs can account for 95% of the variability.
 
@@ -56,6 +59,7 @@ lCVA = sum(groundtruth'-pX' ==0)/length(groundtruth);
 
 figure;
 scatter3(score(group1, 1), score(group1, 2), score(group1, 3), 'ro');
+legend('Ablated');
 hold on
 scatter3(score(group2, 1), score(group2, 2), score(group2, 3), 'bo');
 
@@ -63,7 +67,7 @@ xlabel('pc1');
 ylabel('pc2');
 zlabel('pc3');
 title('Melanophore Data with 3 PCs');
-legend('Ablated','Unablated')
+legend('Unablated')
 axis equal;
 
 %%  QDA 
